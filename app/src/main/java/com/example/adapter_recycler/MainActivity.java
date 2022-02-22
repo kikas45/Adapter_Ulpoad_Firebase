@@ -31,7 +31,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_IMAGE = 10;
     private ImageView imageViewViewAdd;
-    private EditText inputImageName, input_image_desc;
+    private EditText inputImageName;
     private TextView textViewprogress;
     private ProgressBar progressBar;
     private Button btn_upload;
@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         imageViewViewAdd = findViewById(R.id.imageViewAdd);
         inputImageName = findViewById(R.id.inputImageName);
-        input_image_desc = findViewById(R.id.input_image_desc);
         textViewprogress = findViewById(R.id.textViewProgress);
         progressBar = findViewById(R.id.progress_bar);
         btn_upload = findViewById(R.id.btn_upload);
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         StoragerRef = FirebaseStorage.getInstance().getReference().child("CarImage");
 
 
-            // OPENING THE PHINE STORAGE
+        // OPENING THE PHINE STORAGE
         imageViewViewAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
         textViewprogress.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.VISIBLE);
 
-       final  String key  = DataRef.push().getKey();
-       StoragerRef.child(key + ".jpg").putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        final  String key  = DataRef.push().getKey();
+        StoragerRef.child(key + ".jpg").putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
@@ -112,16 +112,15 @@ public class MainActivity extends AppCompatActivity {
                         HashMap hashMap = new HashMap();
                         hashMap.put("CarName", imgName);
                         hashMap.put("ImageUrl", uri.toString());
-                        hashMap.put("desc", imgName);
                         // add the data
                         DataRef.child(key).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Toast.makeText(MainActivity.this, "Data successfully added ", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(MainActivity.this, "Data successfully added ", Toast.LENGTH_SHORT).show();
                                 textViewprogress.setText("Completed");
                                 /// taking the activity to new place
 
-                          new Handler().postDelayed(new Runnable() {
+                                new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
 
@@ -140,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                                         // Set the positive button with yes name
                                         // OnClickListener method is use of
                                         // DialogInterface interface.
-                                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        builder.setPositiveButton("Yes, Go back", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 // When the user click yes button
@@ -148,9 +147,10 @@ public class MainActivity extends AppCompatActivity {
                                                 //finish();
                                                 Intent i=new Intent(MainActivity.this,HomeActivity.class);
                                                 startActivity(i);
+                                                finish();
                                                 //
-                                                            }
-                                                        });
+                                            }
+                                        });
 
                                         // Set the Negative button with No name
                                         // OnClickListener method is use
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                                         // setting up a dialog
                                     }}, 1000);
 
-                          ////END OF HANDLER
+                                ////END OF HANDLER
 
 
                             }
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 double progress = (tasksnapshot.getBytesTransferred() * 100)/tasksnapshot.getTotalByteCount();
                 progressBar.setProgress((int) progress);
                 //progressBar.setProgress(((int) progress));
-               textViewprogress.setText(progress + "%");
+                textViewprogress.setText(progress + "%");
 
 
 
@@ -210,4 +210,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
 }

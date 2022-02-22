@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/background_light"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="20dp"
+    tools:context=".View_Activity"
+    android:scrollbars="vertical"
+    app:cardCornerRadius="20dp">
 
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
 
@@ -14,7 +20,6 @@
         android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="2dp"
         app:cardCornerRadius="5dp"
         android:layout_marginBottom="15dp">
@@ -31,16 +36,15 @@
 
             <ImageView
                 android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:id="@+id/image_single_view"
+                android:id="@+id/imageView_v"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 tools:targetApi="lollipop" />
 
-
             <TextView
-                android:id="@+id/textView_singe_name"
-                android:layout_width="match_parent"
+                android:id="@+id/textView_v"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView"
                 android:text="descriptions"
@@ -48,8 +52,6 @@
                 android:layout_margin="10dp"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText" />
-
-
 
         </LinearLayout>
 

@@ -26,25 +26,15 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:hint="Enter image name.." />
-
-    <EditText
-        android:id="@+id/input_image_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/inputImageName"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:hint="Enter image description.." />
-
     <TextView
-        android:id="@+id/textViewProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/input_image_desc"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
+        android:id="@+id/textViewProgress"
+        android:layout_below="@+id/inputImageName"
         android:text="0.0 %"
-        android:textSize="25dp" />
+        android:gravity="center"
+        android:textSize="25dp"
+        android:layout_marginTop="20dp"/>
         <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,15 +43,14 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_below="@+id/textViewProgress"/>
-
     <Button
-        android:id="@+id/btn_upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="uplaod"
+        android:id="@+id/btn_upload"
         android:layout_below="@id/progress_bar"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:text="uplaod" />
+        android:layout_marginRight="40dp"/>
 
 
 </RelativeLayout>

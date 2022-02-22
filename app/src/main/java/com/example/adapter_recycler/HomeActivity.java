@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -40,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         recycler_View = findViewById(R.id.recycler_view);
 
         //for offline capability
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        Powell.getDatabase();
 
         Dataref2   = FirebaseDatabase.getInstance().getReference().child("Car");
         recycler_View.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -60,10 +62,21 @@ public class HomeActivity extends AppCompatActivity {
 
         adapter = new FirebaseRecyclerAdapter<Car, MyViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Car model) {
+            protected void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull Car model) {
                 holder.textView.setText(model.getCarName());
-                holder.textView_desc.setText(model.getDesc());
                 Picasso.get().load(model.getImageUrl()).into(holder.imageView);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //Toast.makeText(getApplicationContext(), "Home is working" + position, Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(HomeActivity.this, Test.class);
+                       // intent.putExtra("CarKey", getRef(position).getKey());
+                        intent.putExtra("CarKey", "Powell is good boy "+ position);
+                        startActivity(intent);
+                    }
+                });
 
             }
 
@@ -79,5 +92,44 @@ public class HomeActivity extends AppCompatActivity {
 
         adapter.startListening();
         recycler_View.setAdapter(adapter);
+    }
+
+    @Override protected void onStart()
+    {
+        super.onStart();
+        adapter.startListening();
+    }
+
+
+    /*@Override protected void onStop()
+    {
+        super.onStop();
+        adapter.stopListening();
+    }*/
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        adapter.stopListening();
+    }
+
+
+    public static class Powell {
+        private static FirebaseDatabase mDatabase;
+
+        public static FirebaseDatabase getDatabase() {
+            if (mDatabase == null) {
+                mDatabase = FirebaseDatabase.getInstance();
+                mDatabase.setPersistenceEnabled(true);
+            }
+            return mDatabase;
+        }
+
     }
 }

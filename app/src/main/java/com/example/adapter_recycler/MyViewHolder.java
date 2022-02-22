@@ -9,13 +9,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
     TextView textView;
-    TextView textView_desc;
     ImageView imageView;
+    /// inintailazing Onlcik view
+
+   // View v;
+
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);
         textView = itemView.findViewById(R.id.textView_singe_name);
         imageView = itemView.findViewById(R.id.image_single_view);
-        textView_desc = itemView.findViewById(R.id.textView_singe_desc);
+      //  v= itemView;
+
 
     }
 }
