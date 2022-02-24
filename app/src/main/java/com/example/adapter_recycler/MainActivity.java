@@ -145,8 +145,8 @@ public class MainActivity extends AppCompatActivity {
                                                 // When the user click yes button
                                                 // then app will close
                                                 //finish();
-                                                Intent i=new Intent(MainActivity.this,HomeActivity.class);
-                                                startActivity(i);
+                                               /* Intent i=new Intent(MainActivity.this,HomeActivity.class);
+                                                startActivity(i);*/
                                                 finish();
                                                 //
                                             }
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
                                         // Show the Alert Dialog box
                                         alertDialog.show();
                                         // setting up a dialog
-                                    }}, 1000);
+                                    }}, 30);
 
                                 ////END OF HANDLER
 
